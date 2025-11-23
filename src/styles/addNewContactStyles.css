@@ -1,0 +1,90 @@
+.addNewContac {
+  width: 400px;
+  height: 100vh;
+  max-height: 750px;
+  background-color: rgb(27, 27, 27);
+  border-radius: 0.5rem;
+}
+
+.contact_image {
+  width: 100%;
+  height: 40%;
+}
+
+.form_container {
+  width: 95%;
+  margin: 0 auto;
+}
+.form_item {
+  position: relative;
+  width: 80%;
+  padding: 0.7rem 1rem;
+  margin-top: 1.8rem;
+  background-color: rgb(66, 66, 66);
+  outline: none;
+  border-radius: 0.6rem;
+  color: white;
+  font-size: 1rem;
+
+  input {
+    padding-left: 1rem;
+    width: 90%;
+    outline: none;
+
+    &:not(:placeholder-shown) + label {
+      top: -3px;
+      left: 30px;
+      font-size: 1rem;
+    }
+  }
+
+  label {
+    position: absolute;
+    left: 52px;
+    top: 50%;
+    transform: translateY(-50%);
+    font-size: 1rem;
+    color: white;
+    pointer-events: none;
+    transition: 0.25s ease;
+  }
+}
+
+.buttons {
+  margin: auto 0;
+  margin-right: 2rem;
+  button {
+    padding: 0.5rem 1rem;
+    border-radius: 0.5rem;
+    margin-right: 0.5rem;
+    color: white;
+    font-weight: 600;
+    transition: .1s;
+    cursor: pointer;
+  }
+  button:hover{
+    transform: scale(1.1);
+  }
+  .saveBtn {
+    background-color: green;
+  }
+  .discardBtn {
+    background-color: red;
+  }
+}
+
+input[type="number"]::-webkit-inner-spin-button,
+input[type="number"]::-webkit-outer-spin-button {
+  -webkit-appearance: none;
+  margin: 0;
+}
+
+input:-webkit-autofill {
+  -webkit-box-shadow: 0 0 0 1000px rgb(66, 66, 66) inset !important;
+  -webkit-text-fill-color: white !important;
+}
+
+input:-webkit-autofill:focus {
+  -webkit-box-shadow: 0 0 0 1000px rgb(66, 66, 66) inset !important;
+  -webkit-text-fill-color: white !important;
+}

@@ -1,0 +1,53 @@
+:root {
+  --hover-color: rgb(30, 140, 219);
+}
+
+body {
+  background-color: #070707;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.container {
+  width: 400px;
+  height: 100vh;
+  background-color: rgb(27, 27, 27);
+  border-radius: 0.5rem;
+}
+
+.header {
+  width: 100%;
+  padding: 1.5rem 1rem;
+
+  .search_bar {
+    border: 1px solid rgb(103, 103, 103);
+    width: 70%;
+    color: white;
+    padding: 0.5rem 0.8rem;
+    padding-left: 1rem;
+    border-radius: 2rem;
+    input {
+      width: 90%;
+      outline: none;
+      padding-left: 0.5rem;
+    }
+  }
+
+  button {
+    width: 40px;
+    height: 40px;
+    border: 1px solid rgb(103, 103, 103);
+    color: rgb(197, 195, 195);
+    border-radius: 50%;
+    margin-left: 0.5rem;
+    cursor: pointer;
+    transition: .2s ease-in-out;
+  }
+
+  button:hover {
+    background-color: var(--hover-color);
+    border-color: var(--hover-color);
+    transform: scale(1.1);
+  }
+}
