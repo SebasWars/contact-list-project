@@ -1,0 +1,35 @@
+.contact_item {
+  display: flex;
+  width: 90%;
+  height: 100px;
+  margin: auto;
+  margin-bottom: 0.5rem;
+  padding: 0.5rem;
+  background-color: rgb(137, 136, 135);
+  border-radius: 1rem;
+
+  .image {
+    width: 20%;
+  }
+  .contact_info {
+    width: 60%;
+    height: 100%; /* importante para que overflow funcione */
+    overflow-y: auto; /* o hidden si quieres recorte */
+    padding-left: 0.5rem;
+  }
+  .contact_info h1 {
+    font-weight: 700;
+  }
+  .contact_info h2,
+  p {
+    font-size: 0.8rem;
+  }
+
+  .action_buttons button {
+    margin-left: 0.1rem;
+    padding: 0.2rem 0.3rem;
+    border-radius: 50%;
+    background-color: rgb(255, 255, 255);
+    cursor: pointer;
+  }
+}

@@ -38,7 +38,7 @@
     }
   }
 
-  label {
+  label{
     position: absolute;
     left: 52px;
     top: 50%;
@@ -59,17 +59,18 @@
     margin-right: 0.5rem;
     color: white;
     font-weight: 600;
-    transition: .1s;
+    transition: 0.1s;
     cursor: pointer;
+    background-color: transparent;
+    border: 1px solid rgb(112, 112, 112);
   }
-  button:hover{
-    transform: scale(1.1);
+  .saveBtn:hover {
+    transform: scale(1.05);
+    background-color: rgb(30, 140, 219);
   }
-  .saveBtn {
-    background-color: green;
-  }
-  .discardBtn {
-    background-color: red;
+  .discardBtn:hover {
+    transform: scale(1.05);
+    background-color: rgb(219, 87, 30);
   }
 }
 

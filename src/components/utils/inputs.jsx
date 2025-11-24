@@ -1,11 +1,11 @@
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 
-const Input = ({ icon, nombre, type }) => {
+const Input = ({ icon, name, type, value, onChange }) => {
   return (
     <div className="form_item">
       <FontAwesomeIcon icon={icon} />
-      <input id={nombre} type={type} placeholder="" />
-      <label htmlFor="{nombre}">{nombre}</label>
+      <input placeholder="" id={name} name={name} type={type} value={value} onChange={onChange} />
+      <label htmlFor={name}>{name}</label>
     </div>
   );
 };
