@@ -5,14 +5,26 @@ import { faPenToSquare, faTrash } from "@fortawesome/free-solid-svg-icons";
 
 import { useContext } from "react";
 import { ContactContext } from "./App";
+import { FETCH_DATA } from "./utils/fecth";
+import { Link } from "react-router-dom";
 
 const ContactList = () => {
-  const { state, dispatch } = useContext(ContactContext);
+  const { state, dispatch, query } = useContext(ContactContext);
+
+  const REMOVE_CONTACT = async (id) => {
+    await FETCH_DATA(
+      `https://playground.4geeks.com/contact/agendas/Sebas/contacts/${id}`,
+      "DELETE"
+    );
+    dispatch({ type: "removeContact", payload: id });
+  };
+
+  const filteredList = state.filter((contact) => contact.name.toLowerCase().includes(query))
 
   return (
     <div className="contact_list flex flex-col">
-      {state.map((contact, index) => {
-        const { name, phone, email, address } = contact;
+      {filteredList.map((contact, index) => {
+        const { name, phone, email, address, id } = contact;
         return (
           <div
             key={`${index}-${name}`}
@@ -32,14 +44,12 @@ const ContactList = () => {
               <p>{address}</p>
             </div>
             <div className="action_buttons">
-              <button>
-                <FontAwesomeIcon icon={faPenToSquare} />
-              </button>
-              <button
-                onClick={() => {
-                  dispatch({ type: "removeContact", payload: index });
-                }}
-              >
+              <Link to={`/AddNewContact/${id}`}>
+                <button>
+                  <FontAwesomeIcon icon={faPenToSquare} />
+                </button>
+              </Link>
+              <button onClick={() => REMOVE_CONTACT(contact.id)}>
                 <FontAwesomeIcon icon={faTrash} />
               </button>
             </div>

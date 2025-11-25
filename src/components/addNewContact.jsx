@@ -6,15 +6,24 @@ import {
   faEnvelope,
 } from "@fortawesome/free-solid-svg-icons";
 
+import { Link, useNavigate, useParams } from "react-router-dom";
+import { useContext, useEffect, useState } from "react";
+import { ContactContext } from "./App.jsx";
+import { FETCH_DATA } from "./utils/fecth.js";
+
 import "../styles/addNewContactStyles.css";
 import Input from "./utils/inputs.jsx";
-import { Link, useNavigate } from "react-router-dom";
-import { useContext, useState } from "react";
-import { ContactContext } from "./App.jsx";
+
+const POST_DATA =
+  "https://playground.4geeks.com/contact/agendas/Sebas/contacts";
 
 const AddNewContact = () => {
-  const { state, dispatch } = useContext(ContactContext);
   let navigate = useNavigate();
+  const { id } = useParams();
+
+  const { state, dispatch } = useContext(ContactContext);
+  const contactToEdit = state.find((contact) => contact.id == id);
+
   const [formData, setFormData] = useState({
     name: "",
     phone: "",
@@ -22,15 +31,45 @@ const AddNewContact = () => {
     address: "",
   });
 
+  useEffect(() => {
+    if(contactToEdit){
+      setFormData({
+        name: contactToEdit.name,
+        phone: contactToEdit.phone,
+        email: contactToEdit.email,
+        address: contactToEdit.address
+      })
+    }
+  },[contactToEdit])
+
   const handleInput = (e) => {
     const { value, name } = e.target;
     setFormData((prev) => ({ ...prev, [name]: value }));
   };
 
-  const SAVE_NEW_CONTACT = () => {
+  const ADD_CONTACT = async (contact) => {
+    const created = await FETCH_DATA(POST_DATA, "POST", contact);
+    dispatch({ type: "addContact", payload: created });
+  };
+
+  const EDIT_CONTACT = async () => {
+  const updated = await FETCH_DATA(
+    `https://playground.4geeks.com/contact/agendas/Sebas/contacts/${id}`,
+    "PUT",
+    formData
+  );
+  dispatch({ type: "editContact", payload: updated });
+};
+
+  const SAVE_NEW_CONTACT = async () => {
     const { name, phone, address, email } = formData;
     if (!name || !phone || !address || !email) return;
-    dispatch({ type: "addContact", payload: formData });
+    if(contactToEdit){
+      await EDIT_CONTACT();
+      navigate("/");
+      return;
+    }
+    await ADD_CONTACT(formData);
     navigate("/");
   };
 
@@ -79,7 +118,7 @@ const AddNewContact = () => {
           <button className="discardBtn">Discard</button>
         </Link>
         <button className="saveBtn" onClick={SAVE_NEW_CONTACT}>
-          Save
+          {contactToEdit ? 'Edit': 'Save'}
         </button>
       </div>
     </div>
